@@ -6,9 +6,8 @@
     All Rights Reserved.
 
     XigmaNAS® is a registered trademark of Michael Zoon. (zoon01@xigmanas.com).
-    All Rights Reserved.
-    
     Plex®, the Plex Play logo and Plex Media Server are registered trademarks of Plex, Inc.
+    All Rights Reserved.
 
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are met:

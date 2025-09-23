@@ -6,9 +6,8 @@
     All Rights Reserved.
 
     XigmaNAS® is a registered trademark of Michael Zoon. (zoon01@xigmanas.com).
-    All Rights Reserved.
-    
     Plex®, the Plex Play logo and Plex Media Server are registered trademarks of Plex, Inc.
+    All Rights Reserved.
 
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are met:
@@ -157,7 +156,7 @@ if ($_POST):
 		else:
 			$uninstall_plexdata = "";
 		endif;
-		$uninstall_cmd = "rm -rf {$rootfolder}/backup {$rootfolder}/conf {$rootfolder}/gui {$rootfolder}/locale-plex {$rootfolder}/log {$uninstall_plexdata} {$rootfolder}/system {$rootfolder}/plexinit {$rootfolder}/plexversion {$rootfolder}/README {$rootfolder}/release_notes {$rootfolder}/version {$rootfolder}/CHANGELOG {$usrpath}/licenses/{$prdname}-* {$rcdpath}/{$prdname}";
+		$uninstall_cmd = "rm -rf {$rootfolder}/backup {$rootfolder}/conf {$rootfolder}/gui {$rootfolder}/locale-plex {$rootfolder}/log {$uninstall_plexdata} {$rootfolder}/system {$rootfolder}/plexinit {$rootfolder}/plexversion {$rootfolder}/README {$rootfolder}/release_notes {$rootfolder}/AUTHORS {$rootfolder}/version {$rootfolder}/CHANGELOG {$usrpath}/licenses/{$prdname}-* {$rcdpath}/{$prdname}";
 		mwexec($uninstall_cmd, true);
 		if (is_link("{$usrpath}/{$prdname}")) mwexec("rm {$usrpath}/{$prdname}", true);
 		if (is_link("/var/cache/pkg")) mwexec("rm /var/cache/pkg", true);

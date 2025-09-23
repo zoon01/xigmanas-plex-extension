@@ -94,6 +94,7 @@ if (isset($_POST['save-install']) && $_POST['save-install']) {
 // Perform cleanup for obsolete files on upgrade/reinstall.
 				if (is_file("plex-gui.php")) {
 					if (is_file("{$install_dir}plex/version")) unlink("{$install_dir}plex/version");
+					if (is_file("{$install_dir}plex/AUTHORS")) unlink("{$install_dir}plex/AUTHORS");
 					if (is_dir("{$install_dir}plex/conf")) exec("rm -rf {$install_dir}plex/conf");
 					if (is_dir("{$install_dir}plex/gui")) exec("rm -rf {$install_dir}plex/gui");
 					if (is_dir("{$install_dir}plex/locale-plex")) exec("rm -rf {$install_dir}plex/locale-plex");
