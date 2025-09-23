@@ -143,7 +143,7 @@ include("fbegin.inc"); ?>
 			<?php html_checkbox("path_check", gtext("Path check"), $pconfig['path_check'], gtext("If this option is selected no examination of the common directory path will be carried out, whether it was set to a directory below /mnt/."), "<b><font color='red'>".gtext("Please use this option only if you know what you are doing!")."</font></b>", false);?>
 		</table>
 		<div id="submit">
-			<input id="save-install" name="save-install" type="submit" class="formbtn" value="<?=gtext("Save & Install");?>" onclick="return confirm('<?=gtext("Ready to install Plex Media Server Extension?");?>')" />
+			<input id="save-install" name="save-install" type="submit" class="formbtn" value="<?=gtext("Save & Install");?>" onclick="return confirm('<?=gtext("Do you want to install Plex Media Server Extension?");?>')" />
 			<input id="cancel" name="cancel" type="submit" class="formbtn" value="<?=gtext("Cancel");?>"/>
 		</div>
 	</td></tr>
