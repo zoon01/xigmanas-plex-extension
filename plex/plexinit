@@ -46,7 +46,7 @@ CMDNAME=${PRDNAME}
 CMDFILE="Plex_Media_Server"
 BRANCH="master"
 PINGHOST="freebsd.org"
-GITURL="https://github.com/zoon01xigmanas-plex-extension/archive/${BRANCH}.zip"
+GITURL="https://github.com/zoon01/xigmanas-plex-extension/archive/${BRANCH}.zip"
 VERFILE="https://raw.githubusercontent.com/zoon01/xigmanas-plex-extension/${BRANCH}/plex/version"
 
 error_notify()
