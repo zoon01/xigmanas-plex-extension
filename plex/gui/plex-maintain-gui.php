@@ -235,7 +235,7 @@ bindtextdomain("xigmanas", $textdomain_plex);
 				<?php html_titleline(gtext("Upgrade & Restore"));?>
 				<?php html_text("installation_directory", gtext("Installation directory"), sprintf(gtext("The extension is installed in %s"), $rootfolder));?>
 				<?php html_filechooser("backup_path", gtext("Plexdata archive"), "", gtext("Select a previous plexdata backup file or directory to restore from."), $backup_path, true, 60);?>
-				<?php html_checkbox("plex_upgrade", gtext("Plex package upgrade"), false, "<font color='red'>".gtext("Upgrade the Plex Media Server component (overrides maually uploaded tarball).")."</font>", sprintf(gtext("If not activated, only the extension files will be upgraded, this has no effect on initial installations from tarball."), ""), false);?>
+				<?php html_checkbox("plex_upgrade", gtext("Plex package upgrade"), false, "<font color='red'>".gtext("Upgrade the Plex Media Server component (overrides maually uploaded tarball).")."</font>", sprintf(gtext("If not checked, only the extension files will be upgraded, this has no effect on installations from official tarball."), ""), false);?>
 			</table>
 			<div id="submit">
 				<input name="upgrade" type="submit" class="formbtn" title="<?=gtext("Upgrade Extension and Plex Packages");?>" value="<?=gtext("Upgrade");?>" />
@@ -283,8 +283,8 @@ bindtextdomain("xigmanas", $textdomain_plex);
 			</div>
 				<div id="remarks">
 				<?php html_remark("note", gtext("Notes"), sprintf(gtext("Use the %s button to restore plexdata folder from the selected item."), gtext("Restore")));?>
-				<div id="enumeration"><ul><li><a href="https://www.plex.tv/media-server-downloads/" target="_blank" > Official Plex Media Server Downloads</a></li></ul></div>
-				<div id="enumeration"><ul><li><a href="https://forums.plex.tv/" target="_blank" > Official Plex Forum</a></li></ul></div>			
+				<div id="enumeration"><ul><li><a href="https://www.plex.tv/media-server-downloads/?cat=computer&plat=freebsd" target="_blank" > Official Plex Media Server Downloads</a></li></ul></div>
+				<div id="enumeration"><ul><li><a href="https://forums.plex.tv/" target="_blank" > Official Plex Forum</a></li></ul></div>
 			</div>
 		</td></tr>
 	</table>
