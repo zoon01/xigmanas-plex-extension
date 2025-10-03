@@ -54,7 +54,9 @@ error_notify()
 	# Log/notify message on error and exit.
 	MSG="$*"
 	logger -t "${SCRIPTNAME}" "${MSG}"
-	echo -e "${MSG}" >&2; exit 1
+	echo -e "${MSG}" >&2
+	posterror_exec
+	exit 1
 }
 
 tar_current_date()
@@ -306,6 +308,11 @@ get_plex_licpath()
 	PLEXLIC_PATH=$(pkg info -I ${PRDNAME}${PKG_ARG} | awk 'NR==1' | cut -d' ' -f1)
 }
 
+posterror_exec() {
+	# Commands to be executed post errors.
+	unionfs_off
+}
+
 unionfs_on() {
 	if ! df | grep -q "${CWDIR}/system/pkg/db"; then
 		echo "Enabling UnionFS for pkg db..."
@@ -326,6 +333,10 @@ unionfs_off() {
 		echo "Disabling UnionFS for pkg cache..."
 		umount -f /var/cache/pkg
 	fi
+}
+
+fetch_cmd() {
+	pkg install -y ${PRDNAME}${PKG_ARG}
 }
 
 plex_initial_download()
@@ -354,7 +365,9 @@ plex_initial_download()
 			unionfs_on
 
 			# Fetch plex package as usual.
-			pkg install -y ${PRDNAME}${PKG_ARG}
+			fetch_cmd || echo "Cleaning addon stale pkg db and retry..."
+			rm -rf ${CWDIR}/system/pkg/db/*
+			fetch_cmd || error_notify "Error while fetching packages, exiting."
 
 			# Write plex version.
 			gen_current_version
@@ -424,6 +437,7 @@ pkg_upgrade()
 		if ping -c1 ${PINGHOST} > /dev/null 2>&1; then
 			pkg update
 		else
+			posterror_exec
 			echo "Error: ${PINGHOST} is unreachable, Please check your Internet connection."
 			exit 1
 		fi
