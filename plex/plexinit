@@ -1,6 +1,6 @@
 #!/bin/sh
 # plexinit
-# 
+#
 # Part of XigmaNAS® Plex Media Server extension.
 # All Rights Reserved.
 #
@@ -283,7 +283,7 @@ plexdata_restore()
 update_freebsdconf()
 {
 	# Update FreeBSD.conf to fetch latest packages.
-	if [ -f "${PKGCONF}" ]; then 
+	if [ -f "${PKGCONF}" ]; then
 		if grep -q "quarterly" ${PKGCONF}; then
 			cp ${PKGCONF} ${PKGCONF}.bak
 			sed -i '' -E "s/quarterly/latest/g" ${PKGCONF} || \
@@ -362,12 +362,15 @@ plex_initial_download()
 			plex_symlinkdir
 
 			# Ennable UnionFS.
+			trap "unionfs_off" 0 1 2 5 15
 			unionfs_on
 
 			# Fetch plex package as usual.
-			fetch_cmd || echo "Cleaning addon stale pkg db and retry..."
-			rm -rf ${CWDIR}/system/pkg/db/*
-			fetch_cmd || error_notify "Error while fetching packages, exiting."
+			if ! fetch_cmd; then
+				echo "Cleaning addon stale pkg db and retry..."
+				rm -rf ${CWDIR}/system/pkg/db/*
+				fetch_cmd || error_notify "Error while fetching packages, exiting."
+			fi
 
 			# Write plex version.
 			gen_current_version
@@ -422,6 +425,7 @@ pkg_upgrade()
 		plex_symlinkdir
 
 		# Enable UnionFS.
+		trap "unionfs_off" 0 1 2 5 15
 		unionfs_on
 	fi
 
@@ -755,7 +759,7 @@ require_once("functions.inc");
 \$cmd = dirname(__FILE__)."/${SCRIPTNAME}";
 \$name = "Plex Extension";
 \$comment = "Start ${FULLPRDNAME}";
-\$rc = &array_make_branch(\$config,'rc','param'); 
+\$rc = &array_make_branch(\$config,'rc','param');
 if(false === array_search_ex(\$name,\$rc,'name')):
 	\$rc_param = [];
 	\$rc_param['uuid'] = uuid();
@@ -981,12 +985,16 @@ ext_enable_disable()
 get_versions()
 {
 	echo "${APPNAME} ${APPVERSION}"
-	if [ -f "${CWDIR}/plexversion" ]; then
-		VERSION=$(cat ${CWDIR}/plexversion)
-		echo "${VERSION}"
+	if [ ! -f "${PLEXPATH}${PKG_ARG}/${CMDFILE}" ]; then
+		echo "Looks like plex isn't installed yet"
 	else
-		pkg info -I ${PRDNAME} 2> /dev/null || pkg info -I ${PRDNAME}-plexpass 2> /dev/null || \
-		echo "Can not determine plex version."
+		if [ -f "${CWDIR}/plexversion" ]; then
+			VERSION=$(cat ${CWDIR}/plexversion)
+			echo "${VERSION}"
+		else
+			pkg info -I ${PRDNAME} 2> /dev/null || pkg info -I ${PRDNAME}-plexpass 2> /dev/null || \
+			echo "Can not determine plex version."
+		fi
 	fi
 	exit 0
 }

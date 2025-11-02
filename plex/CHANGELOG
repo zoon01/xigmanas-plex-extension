@@ -3,6 +3,7 @@
 ===============================
 Version    Description
 
+4.4.004....Fix for pkg tool called twice, code consistency checks.
 4.4.003....Minor cosmetic changes, target FreeBSD tarball.
 4.4.002....Code changes, improve error handling.
 4.4.001....Extension changes and cleanup2.
@@ -14,7 +15,7 @@ Version    Description
 4.3.027....Workaround to check/restore plex user/group if missing.
 4.3.026....Check if www/ext directory exist on upgrades.
 4.3.025....Ensure the www/ext directory exist.
-4.3.024....Minor changes/updates. 
+4.3.024....Minor changes/updates.
 4.3.023....Remove gui files if any, we use symlinks now.
 4.3.022....Link the extension gui files instead.
 4.3.021....Remove pid file if plex stop successful.
